@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظمة الكوخ الثقافية - التسجيل الإلكتروني</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>tailwind.config={theme:{extend:{fontFamily:{cairo:['Cairo','sans-serif']}}}}</script>
+    <style>
+        :root{--primary:#1B4332;--primary-light:#2D6A4F;--primary-lighter:#40916C;--accent:#D4A017;--bg:#F5F6F0;--card:#FFFFFF;--text:#1A1A2E;--text-muted:#6B7280;--border:#D1D5DB;--success:#059669;--danger:#DC2626;--warning:#D97706}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+        .page{display:none}.page.active{display:block}
+        .site-header{background:linear-gradient(135deg,var(--primary) 0%,#0B2B1E 50%,var(--primary-light) 100%);position:relative;overflow:hidden}
+        .site-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(212,160,23,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(64,145,108,0.1) 0%,transparent 40%)}
+        .hero-shape{position:absolute;border-radius:50%;pointer-events:none;opacity:.07}
+        .hero-shape.c1{width:200px;height:200px;background:var(--accent);top:-40px;left:-60px;animation:fA 18s infinite ease-in-out}
+        .hero-shape.c2{width:120px;height:120px;background:var(--accent);bottom:-30px;right:10%;animation:fB 22s infinite ease-in-out}
+        .hero-shape.c3{width:80px;height:80px;background:#fff;top:30%;right:-20px;animation:fA 15s infinite ease-in-out reverse}
+        .hero-shape.d1{width:60px;height:60px;background:var(--accent);top:20%;left:15%;border-radius:4px;transform:rotate(45deg);animation:fB 20s infinite ease-in-out}
+        @keyframes fA{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(8deg)}}
+        @keyframes fB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(14px) rotate(-6deg)}}
+        .gold-divider{width:120px;height:3px;margin:16px auto;background:linear-gradient(90deg,transparent,var(--accent),transparent);border-radius:2px}
+        .welcome-card{background:linear-gradient(135deg,#fefce8 0%,#fff9db 50%,#fef3c7 100%);border:2px solid var(--accent);border-radius:20px;padding:32px 24px;position:relative;overflow:hidden}
+        .welcome-card::before{content:'';position:absolute;top:-50%;right:-30%;width:300px;height:300px;background:radial-gradient(circle,rgba(212,160,23,0.08),transparent 70%);border-radius:50%}
+        .countdown-wrap{display:flex;justify-content:center;gap:10px;margin:20px 0}
+        .countdown-box{background:var(--primary);border-radius:14px;padding:12px 8px;min-width:66px;text-align:center;position:relative}
+        .countdown-box::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.08),transparent);border-radius:14px}
+        .countdown-num{font-size:26px;font-weight:900;color:var(--accent);line-height:1;display:block}
+        .countdown-label{font-size:10px;color:rgba(255,255,255,0.7);display:block;margin-top:3px}
+        .countdown-sep{font-size:22px;font-weight:900;color:var(--accent);line-height:1;align-self:center;padding-bottom:12px}
+        .fee-card{background:var(--card);border-radius:14px;padding:18px;border:1.5px solid var(--border);text-align:center;transition:all .3s}
+        .fee-card:hover{border-color:var(--accent);box-shadow:0 8px 24px rgba(212,160,23,0.12)}
+        .fee-amount{font-size:30px;font-weight:900;line-height:1.1}
+        .option-card{background:var(--card);border-radius:16px;padding:32px 24px;border:1px solid var(--border);border-right:5px solid var(--accent);transition:all .35s cubic-bezier(.4,0,.2,1);cursor:pointer;position:relative;overflow:hidden}
+        .option-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(27,67,50,0.03),rgba(212,160,23,0.05));opacity:0;transition:opacity .35s}
+        .option-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(27,67,50,0.12);border-right-color:var(--primary-lighter)}
+        .option-card:hover::after{opacity:1}
+        .form-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'Cairo',sans-serif;font-size:15px;color:var(--text);background:#FAFBF7;transition:all .25s}
+        .form-input:focus{outline:none;border-color:var(--primary-lighter);background:#fff;box-shadow:0 0 0 3px rgba(45,106,79,0.1)}
+        .form-input.error{border-color:var(--danger);box-shadow:0 0 0 3px rgba(220,38,38,0.1)}
+        .form-input::placeholder{color:#9CA3AF}
+        textarea.form-input{resize:vertical;min-height:80px}
+        select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;padding-left:36px}
+        .form-label{display:block;font-weight:600;font-size:14px;color:var(--text);margin-bottom:6px}
+        .form-label .req{color:var(--danger);margin-right:2px}
+        .error-msg{color:var(--danger);font-size:12px;margin-top:4px;display:none}
+        .error-msg.show{display:block}
+        .upload-zone{border:2px dashed var(--border);border-radius:12px;padding:18px;text-align:center;cursor:pointer;transition:all .25s;background:#FAFBF7;position:relative}
+        .upload-zone:hover{border-color:var(--primary-lighter);background:rgba(45,106,79,0.03)}
+        .upload-zone.has-file{border-color:var(--success);background:rgba(5,150,105,0.05);border-style:solid}
+        .upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+        .file-preview-img{width:72px;height:72px;object-fit:cover;border-radius:8px;margin:0 auto 6px;display:none;border:2px solid var(--border)}
+        .upload-zone.has-file .file-preview-img{display:block}
+        .btn-primary{background:linear-gradient(135deg,var(--accent) 0%,#B8860B 100%);color:#fff;font-weight:700;padding:14px 36px;border-radius:12px;border:none;font-family:'Cairo',sans-serif;font-size:16px;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,160,23,0.3)}
+        .btn-secondary{background:transparent;color:var(--primary);font-weight:600;padding:12px 28px;border-radius:12px;border:2px solid var(--primary);font-family:'Cairo',sans-serif;font-size:15px;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+        .btn-secondary:hover{background:var(--primary);color:#fff}
+        .btn-sm{padding:8px 16px;font-size:13px;border-radius:8px}
+        .section-divider{display:flex;align-items:center;gap:16px;margin:36px 0 24px}
+        .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+        .section-divider span{background:var(--bg);padding:4px 16px;font-weight:700;font-size:16px;color:var(--primary);white-space:nowrap}
+        .toast-container{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:99999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+        .toast{padding:14px 24px;border-radius:12px;font-weight:600;font-size:14px;color:#fff;pointer-events:auto;animation:tIn .4s ease,tOut .4s ease 4.6s forwards;box-shadow:0 8px 32px rgba(0,0,0,0.15);display:flex;align-items:center;gap:10px;min-width:280px;max-width:90vw}
+        .toast.success{background:linear-gradient(135deg,#059669,#047857)}
+        .toast.error{background:linear-gradient(135deg,#DC2626,#B91C1C)}
+        @keyframes tIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes tOut{from{opacity:1}to{opacity:0;transform:translateY(-10px)}}
+        .loading-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:100000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+        .loading-overlay.active{display:flex}
+        .spinner{width:56px;height:56px;border:4px solid rgba(255,255,255,0.2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .step-list{text-align:right;margin-top:20px;max-height:200px;overflow-y:auto}
+        .step-item{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:12px;color:#9CA3AF;transition:all .3s}
+        .step-item.active{color:var(--primary);font-weight:600}
+        .step-item.done{color:var(--success)}
+        .step-item.fail{color:var(--danger)}
+        .step-item i{width:18px;text-align:center;flex-shrink:0}
+        .progress-bar{height:6px;background:rgba(255,255,255,0.15);border-radius:3px;margin-top:16px;overflow:hidden}
+        .progress-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+        .error-detail{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:11px;color:#991b1b;line-height:1.7;text-align:right;word-break:break-all;display:none;direction:ltr}
+        .error-detail.show{display:block}
+        .success-modal{position:fixed;inset:0;z-index:200000;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px)}
+        .success-modal.active{display:flex}
+        .success-modal-content{background:var(--card);border-radius:24px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;padding:0;animation:modalPop .5s cubic-bezier(.68,-.55,.27,1.55);box-shadow:0 25px 60px rgba(0,0,0,0.3)}
+        @keyframes modalPop{from{opacity:0;transform:scale(.8) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+        .success-modal-header{background:linear-gradient(135deg,var(--success),#047857);padding:32px 24px;text-align:center;border-radius:24px 24px 0 0}
+        .success-check{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;animation:popIn .5s cubic-bezier(.68,-.55,.27,1.55)}
+        @keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+        .info-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f3f4f6}
+        .info-row:last-child{border-bottom:none}
+        .info-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .call-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#059669,#047857);color:#fff;font-weight:700;padding:14px 28px;border-radius:14px;border:none;font-family:'Cairo',sans-serif;font-size:16px;cursor:pointer;transition:all .3s;text-decoration:none}
+        .call-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(5,150,105,0.3)}
+        .pattern-bg{background-image:radial-gradient(circle at 25px 25px,rgba(27,67,50,0.02) 2px,transparent 0);background-size:50px 50px}
+        .date-selects{display:flex;gap:8px}.date-selects select{flex:1}
+        .participation-item{border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;background:#FAFBF7}
+        .work-upload-section{background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 50%,#d1fae5 100%);border:2px solid var(--primary-lighter);border-radius:16px;padding:24px;margin-bottom:24px;position:relative;overflow:hidden}
+        .work-upload-zone{border:2.5px dashed var(--primary-lighter);border-radius:14px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .3s;background:rgba(255,255,255,0.7);position:relative}
+        .work-upload-zone:hover{border-color:var(--primary);background:rgba(255,255,255,0.9);box-shadow:0 4px 16px rgba(27,67,50,0.08)}
+        .work-upload-zone.has-file{border-color:var(--success);background:rgba(5,150,105,0.06);border-style:solid}
+        .work-upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+        .work-preview-img{width:140px;height:140px;object-fit:cover;border-radius:12px;margin:0 auto 10px;display:none;border:3px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+        .work-upload-zone.has-file .work-preview-img{display:block}
+        @media(max-width:768px){.option-card{padding:24px 18px}.date-selects{flex-wrap:wrap}.date-selects select{min-width:calc(33% - 6px)}.file-preview-img{width:56px;height:56px}.countdown-box{min-width:58px;padding:10px 6px}.countdown-num{font-size:20px}.welcome-card{padding:24px 18px}.fee-amount{font-size:24px}.upload-zone{padding:14px}.info-row{flex-direction:column;gap:6px}.info-row .info-icon{width:32px;height:32px;min-width:32px}.work-preview-img{width:110px;height:110px}.work-upload-section{padding:18px}}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+        ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--primary-lighter);border-radius:4px}
+    </style>
+</head>
+<body class="pattern-bg">
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl max-w-sm mx-4">
+            <div class="spinner"></div>
+            <p class="font-bold text-lg text-center" style="color:var(--primary)">جاري الإرسال...</p>
+            <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+            <div class="step-list" id="stepList"></div>
+            <div class="error-detail" id="errorDetail"></div>
+        </div>
+    </div>
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="success-modal" id="successModal">
+        <div class="success-modal-content">
+            <div class="success-modal-header">
+                <div class="success-check"><i class="fas fa-check text-white text-4xl"></i></div>
+                <h3 class="text-white text-xl font-black mb-1">تم إرسال طلبك بنجاح</h3>
+                <p class="text-green-100 text-sm">الرقم المرجعي: <span class="font-bold text-yellow-200 text-lg" id="refNumber"></span></p>
+            </div>
+            <div class="p-6">
+                <div class="info-row"><div class="info-icon bg-green-50"><i class="fas fa-clock text-sm" style="color:var(--success)"></i></div><div><p class="text-xs text-gray-400">موعد الاستلام</p><p class="text-sm font-bold">يتم تسليم الهوية خلال <span class="text-green-700">15 يوماً</span> من تاريخ التقديم</p></div></div>
+                <div class="info-row"><div class="info-icon bg-blue-50"><i class="fas fa-map-marker-alt text-sm text-blue-600"></i></div><div><p class="text-xs text-gray-400">مكان الاستلام</p><p class="text-sm font-bold">النجف الأشرف — قضاء الكوفة — حي المتنبي — مجاور مدارس البويب</p></div></div>
+                <div class="info-row"><div class="info-icon bg-amber-50"><i class="fas fa-hourglass-half text-sm text-amber-600"></i></div><div><p class="text-xs text-gray-400">أوقات المراجعة</p><p class="text-sm font-bold"><span class="text-amber-700">8:00 صباحاً</span> — <span class="text-amber-700">12:00 ظهراً</span></p></div></div>
+                <div class="info-row" style="border-bottom:none;padding-bottom:0"><div class="info-icon bg-green-50"><i class="fas fa-phone text-sm" style="color:var(--success)"></i></div><div><p class="text-xs text-gray-400 mb-2">للتواصل</p><a href="tel:07831397452" class="call-btn"><i class="fas fa-phone-volume"></i> 07831397452</a></div></div>
+                <div class="flex flex-wrap gap-3 mt-5 pt-4 border-t border-gray-100">
+                    <button onclick="printApp()" class="btn-secondary btn-sm"><i class="fas fa-print"></i> طباعة الاستمارة</button>
+                    <button onclick="closeSuccessModal()" class="btn-primary btn-sm" style="flex:1;justify-content:center"><i class="fas fa-home"></i> العودة للرئيسية</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-home" class="page active">
+        <header class="site-header py-16 md:py-24 relative">
+            <div class="hero-shape c1"></div><div class="hero-shape c2"></div><div class="hero-shape c3"></div><div class="hero-shape d1"></div>
+            <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+                <div class="inline-block mb-4"><div class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-500 to-yellow-700 flex items-center justify-center mx-auto shadow-lg"><i class="fas fa-landmark text-white text-2xl"></i></div></div>
+                <h1 class="text-white text-2xl md:text-4xl font-black leading-relaxed mb-2">منظمة الكوخ الثقافية</h1>
+                <div class="gold-divider"></div>
+                <p class="text-green-200 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">منظمة غير حكومية مسجلة بالرقم <span class="text-yellow-300 font-bold">(1BJ2407016)</span> — دائرة المنظمات غير حكومية</p>
+            </div>
+        </header>
+        <main class="max-w-4xl mx-auto px-6 -mt-8 relative z-20 pb-16">
+            <div class="welcome-card mb-8">
+                <div class="relative z-10 text-center mb-5">
+                    <p class="text-lg md:text-xl font-black leading-relaxed" style="color:var(--primary)">أهلاً وسهلاً بكم في عائلة تجمع فان كوخ الفني</p>
+                    <div class="gold-divider"></div>
+                    <p class="text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">يسرنا فتح باب الانضمام للفنانين من أصحاب الاختصاص والمواهب بمختلف مجالات الفنون.</p>
+                </div>
+                <div class="relative z-10 text-center">
+                    <p class="text-xs font-bold mb-3" style="color:var(--primary)" id="countdownTitle"></p>
+                    <div class="countdown-wrap">
+                        <div class="countdown-box"><span class="countdown-num" id="cdDays">00</span><span class="countdown-label">يوم</span></div>
+                        <span class="countdown-sep">:</span>
+                        <div class="countdown-box"><span class="countdown-num" id="cdHours">00</span><span class="countdown-label">ساعة</span></div>
+                        <span class="countdown-sep">:</span>
+                        <div class="countdown-box"><span class="countdown-num" id="cdMins">00</span><span class="countdown-label">دقيقة</span></div>
+                        <span class="countdown-sep">:</span>
+                        <div class="countdown-box"><span class="countdown-num" id="cdSecs">00</span><span class="countdown-label">ثانية</span></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2" id="countdownSub"></p>
+                </div>
+                <div class="relative z-10 mt-6">
+                    <p class="text-center text-sm font-bold mb-4" style="color:var(--primary)"><i class="fas fa-id-card-clip ml-1"></i> رسوم الانتماء تضمن لك مشاركة في جميع المهرجانات ودورات الرسم</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="fee-card"><p class="text-xs text-gray-400 mb-1">التقديم لأول مرة</p><p class="fee-amount" style="color:var(--accent)">20,000</p><p class="text-xs font-bold" style="color:var(--primary)">دينار عراقي</p></div>
+                        <div class="fee-card"><p class="text-xs text-gray-400 mb-1">تجديد الانتماء السنوي</p><p class="fee-amount" style="color:var(--accent)">15,000</p><p class="text-xs font-bold" style="color:var(--primary)">دينار عراقي</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mb-8"><h2 class="text-xl md:text-2xl font-bold text-gray-800">التسجيل الإلكتروني</h2><p class="text-gray-500 mt-2">اختر نوع الاستمارة</p></div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="option-card" onclick="navigateTo('new-membership')"><div class="relative z-10"><div class="w-14 h-14 rounded-xl bg-green-50 flex items-center justify-center mb-5"><i class="fas fa-user-plus text-2xl" style="color:var(--primary-lighter)"></i></div><h3 class="text-lg font-bold mb-2" style="color:var(--primary)">استمارة انتماء لأول مرة</h3><p class="text-sm text-gray-500 leading-relaxed mb-6">تقديم طلب انتماء جديد مع إرفاق المستمسكات وصورة العمل.</p><span class="btn-primary btn-sm"><i class="fas fa-arrow-left"></i> ابدأ الآن</span></div></div>
+                <div class="option-card" onclick="navigateTo('renewal')"><div class="relative z-10"><div class="w-14 h-14 rounded-xl bg-yellow-50 flex items-center justify-center mb-5"><i class="fas fa-id-card-clip text-2xl" style="color:var(--accent)"></i></div><h3 class="text-lg font-bold mb-2" style="color:var(--primary)">استمارة تجديد العضوية</h3><p class="text-sm text-gray-500 leading-relaxed mb-6">تجديد هوية العضوية المنتهية مع توثيق المشاركات.</p><span class="btn-primary btn-sm"><i class="fas fa-arrow-left"></i> ابدأ الآن</span></div></div>
+            </div>
+        </main>
+        <footer class="text-center py-8 border-t border-gray-200"><p class="text-sm text-gray-400">&copy;  طاهر دوهان 07823464275</p></footer>
+    </div>
+
+    <div id="page-new-membership" class="page">
+        <header class="site-header py-5 relative"><div class="relative z-10 max-w-4xl mx-auto px-6 flex items-center justify-between"><button onclick="navigateTo('home')" class="text-green-200 hover:text-white transition-colors bg-transparent border-none cursor-pointer flex items-center gap-2 text-sm font-semibold"><i class="fas fa-arrow-right"></i> العودة</button><span class="text-white font-bold text-sm"><i class="fas fa-landmark ml-2 text-yellow-400"></i> منظمة الكوخ الثقافية</span></div></header>
+        <main class="max-w-3xl mx-auto px-6 py-10">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10">
+                <h2 class="text-xl font-black mb-1" style="color:var(--primary)">استمارة انتماء العضوية</h2>
+                <p class="text-sm text-gray-400 mb-6">يرجى ملء كافة الحقول المطلوبة</p>
+                <form id="formNew" onsubmit="return submitNew(event)">
+                    <div class="section-divider"><span><i class="fas fa-user ml-2"></i>المعلومات الشخصية</span></div>
+                    <div class="grid md:grid-cols-2 gap-5 mb-5">
+                        <div class="md:col-span-2"><label class="form-label">الاسم الرباعي واللقب <span class="req">*</span></label><input type="text" name="fullName" class="form-input" placeholder="الاسم الأول، اسم الأب، الجد، العائلة، اللقب" required><div class="error-msg">مطلوب</div></div>
+                        <div><label class="form-label">الاسم الفني</label><input type="text" name="artName" class="form-input"></div>
+                        <div><label class="form-label">تاريخ الميلاد <span class="req">*</span></label><div class="date-selects"><select name="birthDay" class="form-input" required><option value="">يوم</option></select><select name="birthMonth" class="form-input" required><option value="">شهر</option></select><select name="birthYear" class="form-input" required><option value="">سنة</option></select></div><div class="error-msg">مطلوب</div></div>
+                        <div><label class="form-label">التحصيل الدراسي <span class="req">*</span></label><select name="education" class="form-input" required><option value="">اختر</option><option>ابتدائية</option><option>كلية فنون جميله</option><option>فنون جميله</option><option>دبلوم</option><option>بكالوريوس</option><option>ماجستير</option><option>دكتوراه</option><option>أخرى</option></select><div class="error-msg">مطلوب</div></div>
+                        <div><label class="form-label">الاختصاص <span class="req">*</span></label><input type="text" name="specialization" class="form-input" required><div class="error-msg">مطلوب</div></div>
+                        <div class="md:col-span-2"><label class="form-label">السكن <span class="req">*</span></label><input type="text" name="address" class="form-input" required><div class="error-msg">مطلوب</div></div>
+                        <div><label class="form-label">الهوايات</label><input type="text" name="hobbies" class="form-input"></div>
+                        <div><label class="form-label">الموهبة <span class="req">*</span></label><input type="text" name="talent" class="form-input" required><div class="error-msg">مطلوب</div></div>
+                        <div class="md:col-span-2"><label class="form-label">المشاركات الفنية</label><textarea name="participations" class="form-input" rows="3"></textarea></div>
+                        <div><label class="form-label">رقم الهاتف <span class="req">*</span></label><input type="tel" name="phone" class="form-input" required pattern="^07[0-9]{9}$" maxlength="11" placeholder="07xxxxxxxxx"><div class="error-msg">11 رقماً يبدأ بـ 07</div></div>
+                    </div>
+                    <div class="section-divider"><span><i class="fas fa-palette ml-2"></i>صورة العمل الفني</span></div>
+                    <div class="work-upload-section"><div class="relative z-10"><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:var(--primary)"><i class="fas fa-image text-white text-lg"></i></div><div><p class="font-bold text-sm" style="color:var(--primary)">إرفاق صورة للعمل الفني <span class="req">*</span></p><p class="text-xs text-gray-500">يجب إرفاق صورة واضحة لعمل فني يمثل مهارتك</p></div></div><div class="work-upload-zone" id="zone-workPhoto"><input type="file" accept=".jpg,.jpeg,.png" data-key="workPhoto" onchange="handleFile(this)"><img class="work-preview-img" id="preview-workPhoto"><div id="workPhotoPlaceholder"><i class="fas fa-cloud-arrow-up text-3xl mb-2" style="color:var(--primary-lighter)"></i><p class="text-sm font-bold" style="color:var(--primary)">اضغط هنا لاختيار صورة العمل</p><p class="text-xs text-gray-400 mt-1">JPG, PNG — حتى 30 ميجابايت</p></div></div><div class="error-msg" id="err-workPhoto">يجب إرفاق صورة للعمل الفني</div></div></div>
+                    <div class="section-divider"><span><i class="fas fa-credit-card ml-2"></i>رسوم الانتماء</span></div>
+                    <div class="bg-gradient-to-r from-amber-50 via-orange-50 to-amber-100 border-amber-200 border-r-4 rounded-2xl p-5 mb-5 relative overflow:hidden"><div class="relative z-10"><p class="text-sm font-bold mb-3" style="color:#92400E"><i class="fas fa-exclamation-triangle ml-1"></i>ملاحظة مهمة قبل رفع وصل الدفع</p><div class="space-y-3 text-sm text-gray-600 leading-relaxed"><div class="flex items-start gap-3"><span class="flex-shrink-0 w-5 h-5 bg-amber-100 rounded-full flex items-center justify-center"><i class="fas fa-credit-card text-amber-600 text-xs"></i></span><span><strong>زين كاش:</strong> تحويل إلى <strong>07823464275</strong> مع لقطة شاشة واضحة.</span></div><div class="flex items-start gap-3"><span class="flex-shrink-0 w-5 h-5 bg-amber-100 rounded-full flex items-center justify-center"><i class="fas fa-credit-card text-amber-600 text-xs"></i></span><span><strong>الماستر كارد:</strong> وصل الدفع من الرقم <strong>8184071648</strong>.</span></div></div><p class="font-bold text-xs mt-3" style="color:#DC2626"><i class="fas fa-ban ml-1"></i>لن يتم النظر في الاستمارة بدون وصل دفع.</p></div></div>
+                    <div class="section-divider"><span><i class="fas fa-paperclip ml-2"></i>المرفقات والمستندات</span></div>
+                    <p class="text-xs text-gray-400 mb-4">JPG, PNG, PDF — حتى 30 ميجابايت</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-5">
+                        <div><label class="form-label">الصورة الشخصية <span class="req">*</span></label><div class="upload-zone" id="zone-photo"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="photo" onchange="handleFile(this)"><img class="file-preview-img" id="preview-photo"><i class="fas fa-camera text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">الصورة الشخصية</p></div><div class="error-msg" id="err-photo">مطلوب</div></div>
+                        <div><label class="form-label">وجه البطاقة الوطنية <span class="req">*</span></label><div class="upload-zone" id="zone-idFront"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="idFront" onchange="handleFile(this)"><img class="file-preview-img" id="preview-idFront"><i class="fas fa-id-card text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">وجه البطاقة</p></div><div class="error-msg" id="err-idFront">مطلوب</div></div>
+                        <div><label class="form-label">باقي البطاقة الوطنية <span class="req">*</span></label><div class="upload-zone" id="zone-idBack"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="idBack" onchange="handleFile(this)"><img class="file-preview-img" id="preview-idBack"><i class="fas fa-id-card-clip text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">باقي البطاقة</p></div><div class="error-msg" id="err-idBack">مطلوب</div></div>
+                        <div><label class="form-label">وجه بطاقة السكن <span class="req">*</span></label><div class="upload-zone" id="zone-resFront"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="resFront" onchange="handleFile(this)"><img class="file-preview-img" id="preview-resFront"><i class="fas fa-house text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">وجه بطاقة السكن</p></div><div class="error-msg" id="err-resFront">مطلوب</div></div>
+                        <div><label class="form-label">باقي بطاقة السكن <span class="req">*</span></label><div class="upload-zone" id="zone-resBack"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="resBack" onchange="handleFile(this)"><img class="file-preview-img" id="preview-resBack"><i class="fas fa-file-lines text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">باقي بطاقة السكن</p></div><div class="error-msg" id="err-resBack">مطلوب</div></div>
+                        <div><label class="form-label">وصل الدفع <span class="req">*</span></label><div class="upload-zone" id="zone-receipt"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="receipt" onchange="handleFile(this)"><img class="file-preview-img" id="preview-receipt"><i class="fas fa-receipt text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">وصل الدفع</p></div><div class="error-msg" id="err-receipt">مطلوب</div></div>
+                    </div>
+                    <div class="border-t border-gray-100 pt-6 mt-6">
+                        <label class="flex items-start gap-3 cursor-pointer mb-6"><input type="checkbox" id="pledgeNew" class="mt-1 w-5 h-5 accent-green-700 flex-shrink-0" required><span class="text-sm text-gray-600 leading-relaxed">أتعهد بصحة المعلومات والوثائق المقدمة من قبلي، وعليه أتحمل كافة التبعات القانونية.</span></label>
+                        <div class="error-msg mb-4" id="err-pledgeNew">يجب الموافقة على التعهد</div>
+                        <div class="flex flex-wrap gap-3"><button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> إرسال الطلب</button><button type="button" onclick="navigateTo('home')" class="btn-secondary"><i class="fas fa-times"></i> إلغاء</button></div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <div id="page-renewal" class="page">
+        <header class="site-header py-5 relative"><div class="relative z-10 max-w-4xl mx-auto px-6 flex items-center justify-between"><button onclick="navigateTo('home')" class="text-green-200 hover:text-white transition-colors bg-transparent border-none cursor-pointer flex items-center gap-2 text-sm font-semibold"><i class="fas fa-arrow-right"></i> العودة</button><span class="text-white font-bold text-sm"><i class="fas fa-landmark ml-2 text-yellow-400"></i> منظمة الكوخ الثقافية</span></div></header>
+        <main class="max-w-3xl mx-auto px-6 py-10">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10">
+                <h2 class="text-xl font-black mb-1" style="color:var(--primary)">استمارة تجديد العضوية</h2>
+                <p class="text-sm text-gray-400 mb-6">تجديد هوية العضوية المنتهية مع توثيق المشاركات</p>
+                <form id="formRenewal" onsubmit="return submitRenewal(event)">
+                    <div class="section-divider"><span><i class="fas fa-user ml-2"></i>معلومات العضو</span></div>
+                    <div class="grid md:grid-cols-2 gap-5 mb-5">
+                        <div class="md:col-span-2"><label class="form-label">الاسم الرباعي واللقب <span class="req">*</span></label><input type="text" name="fullName" class="form-input" required><div class="error-msg">مطلوب</div></div>
+                        <div><label class="form-label">رقم الهوية المنتهية <span class="req">*</span></label><input type="text" name="expiredId" class="form-input" required><div class="error-msg">مطلوب</div></div>
+                        <div><label class="form-label">تاريخ الانتماء لأول مرة <span class="req">*</span></label><div class="date-selects"><select name="firstDay" class="form-input" required><option value="">يوم</option></select><select name="firstMonth" class="form-input" required><option value="">شهر</option></select><select name="firstYear" class="form-input" required><option value="">سنة</option></select></div><div class="error-msg">مطلوب</div></div>
+                        <div class="md:col-span-2"><label class="form-label">الاختصاص <span class="req">*</span></label><input type="text" name="specialization" class="form-input" required><div class="error-msg">مطلوب</div></div>
+                    </div>
+                    <div class="section-divider"><span><i class="fas fa-list-check ml-2"></i>المشاركات (5 كحد أدنى)</span></div>
+                    <div id="participationsContainer"></div>
+                    <button type="button" onclick="addParticipation()" class="btn-secondary btn-sm mt-2 mb-5"><i class="fas fa-plus"></i> إضافة مشاركة</button>
+                    <div class="section-divider"><span><i class="fas fa-credit-card ml-2"></i>رسوم الانتماء</span></div>
+                    <div class="bg-gradient-to-r from-amber-50 via-orange-50 to-amber-100 border-amber-200 border-r-4 rounded-2xl p-5 mb-5 relative overflow:hidden"><div class="relative z-10"><p class="text-sm font-bold mb-3" style="color:#92400E"><i class="fas fa-exclamation-triangle ml-1"></i>ملاحظة مهمة</p><div class="space-y-3 text-sm text-gray-600 leading-relaxed"><div class="flex items-start gap-3"><span class="flex-shrink-0 w-5 h-5 bg-amber-100 rounded-full flex items-center justify-center"><i class="fas fa-credit-card text-amber-600 text-xs"></i></span><span><strong>زين كاش:</strong> تحويل إلى <strong style="color:#B45309">07823464275</strong> مع لقطة شاشة.</span></div><div class="flex items-start gap-3"><span class="flex-shrink-0 w-5 h-5 bg-amber-100 rounded-full flex items-center justify-center"><i class="fas fa-credit-card text-amber-600 text-xs"></i></span><span><strong>الماستر كارد:</strong> وصل الدفع من <strong style="color:#B45309">9515417245</strong>.</span></div></div><p class="font-bold text-xs mt-3" style="color:#DC2626"><i class="fas fa-ban ml-1"></i>لن يتم النظر في الاستمارة بدون وصل الدفع.</p></div></div>
+                    <div class="section-divider"><span><i class="fas fa-paperclip ml-2"></i>المرفقات</span></div>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-5">
+                        <div><label class="form-label">الصورة الشخصية <span class="req">*</span></label><div class="upload-zone" id="zone-r-photo"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="photo" onchange="handleFile(this)"><img class="file-preview-img" id="preview-r-photo"><i class="fas fa-camera text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">الصورة الشخصية</p></div><div class="error-msg" id="err-r-photo">مطلوب</div></div>
+                        <div><label class="form-label">وجه البطاقة <span class="req">*</span></label><div class="upload-zone" id="zone-r-idFront"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="idFront" onchange="handleFile(this)"><img class="file-preview-img" id="preview-r-idFront"><i class="fas fa-id-card text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">وجه البطاقة</p></div><div class="error-msg" id="err-r-idFront">مطلوب</div></div>
+                        <div><label class="form-label">باقي البطاقة <span class="req">*</span></label><div class="upload-zone" id="zone-r-idBack"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="idBack" onchange="handleFile(this)"><img class="file-preview-img" id="preview-r-idBack"><i class="fas fa-id-card-clip text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">باقي البطاقة</p></div><div class="error-msg" id="err-r-idBack">مطلوب</div></div>
+                        <div><label class="form-label">وجه بطاقة السكن <span class="req">*</span></label><div class="upload-zone" id="zone-r-resFront"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="resFront" onchange="handleFile(this)"><img class="file-preview-img" id="preview-r-resFront"><i class="fas fa-house text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">وجه بطاقة السكن</p></div><div class="error-msg" id="err-r-resFront">مطلوب</div></div>
+                        <div><label class="form-label">باقي بطاقة السكن</label><div class="upload-zone" id="zone-r-resBack"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="resBack" onchange="handleFile(this)"><img class="file-preview-img" id="preview-r-resBack"><i class="fas fa-file-lines text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">باقي بطاقة السكن</p></div></div>
+                        <div><label class="form-label">وصل الدفع <span class="req">*</span></label><div class="upload-zone" id="zone-r-receipt"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="receipt" onchange="handleFile(this)"><img class="file-preview-img" id="preview-r-receipt"><i class="fas fa-receipt text-gray-300 text-xl mb-1"></i><p class="text-xs text-gray-400">وصل الدفع</p></div><div class="error-msg" id="err-r-receipt">مطلوب</div></div>
+                    </div>
+                    <div class="border-t border-gray-100 pt-6 mt-6">
+                        <label class="flex items-start gap-3 cursor-pointer mb-6"><input type="checkbox" id="pledgeRenewal" class="mt-1 w-5 h-5 accent-green-700 flex-shrink-0" required><span class="text-sm text-gray-600 leading-relaxed">أتعهد بصحة المعلومات والوثائق المقدمة من قبلي.</span></label>
+                        <div class="error-msg mb-4" id="err-pledgeRenewal">يجب الموافقة</div>
+                        <div class="flex flex-wrap gap-3"><button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> إرسال الطلب</button><button type="button" onclick="navigateTo('home')" class="btn-secondary"><i class="fas fa-times"></i> إلغاء</button></div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+<script>
+/* ===== بيانات البوت ===== */
+const TG_TOKEN = '8987724034:AAEQYChbjL5jSBe_dWHkR0ny0TID9PHbgNk';
+const TG_CHAT_ID = '395764615';
+
+const MAX_FILE=30*1024*1024;
+const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const FILE_LABELS={workPhoto:'صورة العمل الفني',photo:'الصورة الشخصية',idFront:'وجه البطاقة الوطنية',idBack:'باقي البطاقة الوطنية',resFront:'وجه بطاقة السكن',resBack:'باقي بطاقة السكن',receipt:'وصل الدفع'};
+let uploadedFiles={},lastAppData=null,countInterval=null;
+const START_DATE=new Date(2026,5,1),END_DATE=new Date(2026,6,1);
+
+function b64ToBlob(b64){const p=b64.split(','),m=p[0].match(/:(.*?);/)[1],r=atob(p[1]),a=new Uint8Array(r.length);for(let i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return new Blob([a],{type:m});}
+function compressPreview(file){return new Promise((res,rej)=>{if(!file.type.startsWith('image/')){const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(file);return;}const img=new Image();img.onload=function(){const c=document.createElement('canvas');let w=img.width,h=img.height;if(w>600){h=Math.round(h*(600/w));w=600;}c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',0.5));};img.onerror=rej;img.src=URL.createObjectURL(file);});}
+function compressPDF(file){return new Promise((res,rej)=>{if(!file.type.startsWith('image/')){const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(file);return;}const img=new Image();img.onload=function(){const c=document.createElement('canvas');let w=img.width,h=img.height;if(w>1200){h=Math.round(h*(1200/w));w=1200;}c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',0.75));};img.onerror=rej;img.src=URL.createObjectURL(file);});}
+
+function updateCountdown(){
+    const now=new Date(),tE=document.getElementById('countdownTitle'),sE=document.getElementById('countdownSub');
+    let target;
+    if(now<START_DATE){
+        target=START_DATE;tE.textContent='يبدأ التقديم بعد';sE.textContent='2026/6/1 — 2026/7/1';sE.style.color='';
+    }else if(now<END_DATE){
+        target=END_DATE;tE.textContent='ينتهي التقديم بعد';sE.textContent='البوابة مفتوحة الآن';sE.style.color='var(--success)';
+    }else{
+        document.getElementById('cdDays').textContent='00';document.getElementById('cdHours').textContent='00';document.getElementById('cdMins').textContent='00';document.getElementById('cdSecs').textContent='00';tE.textContent='انتهت فترة التقديم';sE.textContent='انتظروا الموعد القادم';sE.style.color='var(--danger)';return;
+    }
+    const diff=target-now;if(diff<=0){clearInterval(countInterval);return;}
+    document.getElementById('cdDays').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
+    document.getElementById('cdHours').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+    document.getElementById('cdMins').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    document.getElementById('cdSecs').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+}
+function startCountdown(){if(countInterval)clearInterval(countInterval);updateCountdown();countInterval=setInterval(updateCountdown,1000);}
+
+function navigateTo(page){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    const t=document.getElementById('page-'+page);
+    if(t){t.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+    if(page==='home')startCountdown();
+    if(page==='new-membership')initDateSelects('birthDay','birthMonth','birthYear',1940,2010);
+    if(page==='renewal'){initDateSelects('firstDay','firstMonth','firstYear',2010,2024);initParticipations();}
+    if(page==='new-membership'||page==='renewal'){uploadedFiles={};resetFilePreviews(page==='renewal'?'r-':'');}
+}
+function initDateSelects(d,m,y,minY,maxY){
+    const ds=document.querySelector('[name="'+d+'"]'),ms=document.querySelector('[name="'+m+'"]'),ys=document.querySelector('[name="'+y+'"]');
+    if(!ds)return;ds.innerHTML='<option value="">يوم</option>';ms.innerHTML='<option value="">شهر</option>';ys.innerHTML='<option value="">سنة</option>';
+    for(let i=1;i<=31;i++)ds.innerHTML+='<option value="'+i+'">'+i+'</option>';
+    for(let i=0;i<12;i++)ms.innerHTML+='<option value="'+(i+1)+'">'+MONTHS[i]+'</option>';
+    for(let i=maxY;i>=minY;i--)ys.innerHTML+='<option value="'+i+'">'+i+'</option>';
+}
+let partCount=0;
+function initParticipations(){partCount=0;document.getElementById('participationsContainer').innerHTML='';for(let i=0;i<5;i++)addParticipation();}
+function addParticipation(){
+    partCount++;const idx=partCount,c=document.getElementById('participationsContainer'),d=document.createElement('div');
+    d.className='participation-item';d.id='part-'+idx;
+    d.innerHTML='<div class="flex items-center justify-between mb-3"><span class="font-bold text-sm" style="color:var(--primary)"><i class="fas fa-bookmark ml-1"></i> المشاركة '+idx+'</span>'+(idx>5?'<button type="button" onclick="removePart('+idx+')" class="text-xs text-red-500 hover:text-red-700 bg-transparent border-none cursor-pointer"><i class="fas fa-trash-alt"></i> حذف</button>':'')+'</div><div class="mb-3"><textarea class="form-input text-sm" name="part_text_'+idx+'" rows="2" placeholder="وصف المشاركة..." required></textarea></div><div class="upload-zone py-3" id="zone-part-'+idx+'"><input type="file" accept=".jpg,.jpeg,.png,.pdf" data-key="part_file_'+idx+'" onchange="handleFile(this)"><div class="file-preview-inline" id="preview-part-'+idx+'"><i class="fas fa-paperclip text-gray-300 ml-2"></i><span class="text-sm text-gray-400">إرفاق ملف (اختياري)</span></div></div>';
+    c.appendChild(d);
+}
+function removePart(idx){const el=document.getElementById('part-'+idx);if(el)el.remove();delete uploadedFiles['part_file_'+idx];}
+
+async function handleFile(input){
+    const file=input.files[0];if(!file)return;const key=input.dataset.key;
+    if(!['image/jpeg','image/png','application/pdf'].includes(file.type)){showToast('صيغة غير مدعومة','error');input.value='';return;}
+    if(file.size>MAX_FILE){showToast('حجم الملف يتجاوز 30 ميجابايت','error');input.value='';return;}
+    try{
+        const originalData=await new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsDataURL(file);});
+        const previewData=await compressPreview(file);const pdfData=await compressPDF(file);
+        uploadedFiles[key]={name:file.name,type:file.type,originalData:originalData,previewData:previewData,pdfData:pdfData};
+        const zone=input.closest('.upload-zone')||input.closest('.work-upload-zone');if(!zone)return;
+        if(key==='workPhoto'){
+            const pe=document.getElementById('preview-workPhoto'),ph=document.getElementById('workPhotoPlaceholder');
+            if(pe){pe.src=previewData;pe.style.display='block';}if(ph)ph.style.display='none';zone.classList.add('has-file');return;
+        }
+        const imgEl=zone.querySelector('img'),inlineEl=zone.querySelector('.file-preview-inline');
+        if(imgEl&&imgEl.id){if(file.type.startsWith('image/')){imgEl.src=previewData;imgEl.style.display='';}else{imgEl.style.display='none';}}
+        if(inlineEl&&inlineEl.id){inlineEl.innerHTML='<i class="fas fa-file-circle-check text-green-500 ml-2"></i><span class="text-sm text-green-700 font-semibold">'+file.name+'</span>';}
+        zone.classList.add('has-file');
+    }catch(e){showToast('خطأ في معالجة الملف','error');console.error(e);}
+}
+function resetFilePreviews(p){
+    document.querySelectorAll('[id^="zone-'+p+'"]').forEach(z=>z.classList.remove('has-file'));
+    document.querySelectorAll('[id^="preview-'+p+'"]').forEach(el=>{if(el.tagName==='IMG'){el.src='';el.style.display='';}else{el.innerHTML='<i class="fas fa-paperclip text-gray-300 ml-2"></i><span class="text-sm text-gray-400">اضغط لاختيار</span>';}});
+    const wI=document.getElementById('preview-workPhoto'),wP=document.getElementById('workPhotoPlaceholder'),wZ=document.getElementById('zone-workPhoto');
+    if(wI){wI.src='';wI.style.display='none';}if(wP)wP.style.display='';if(wZ)wZ.classList.remove('has-file');
+    document.querySelectorAll('input[type="file"]').forEach(i=>i.value='');
+}
+
+function vf(input){
+    let v=true;if(input.required&&!input.value.trim())v=false;
+    if(input.pattern&&input.value&&!new RegExp('^'+input.pattern+'$').test(input.value))v=false;
+    input.classList.toggle('error',!v);
+    const e=input.closest('div')?.querySelector('.error-msg');if(e)e.classList.toggle('show',!v);return v;
+}
+function vDate(d,m,y){
+    const ds=document.querySelector('[name="'+d+'"]'),ms=document.querySelector('[name="'+m+'"]'),ys=document.querySelector('[name="'+y+'"]');
+    const ok=ds.value&&ms.value&&ys.value;
+    [ds,ms,ys].forEach(s=>s.classList.toggle('error',!ok));
+    const e=ds?.closest('.date-selects')?.parentElement?.querySelector('.error-msg');if(e)e.classList.toggle('show',!ok);return ok;
+}
+function vFiles(keys,prefix){
+    let ok=true;
+    keys.forEach(x=>{
+        if(!uploadedFiles[x]){const e=document.getElementById('err-'+prefix+x);if(e)e.classList.add('show');ok=false;}
+        else{const e=document.getElementById('err-'+prefix+x);if(e)e.classList.remove('show');}
+    });
+    return ok;
+}
+function genRef(){const n=new Date(),p=x=>String(x).padStart(2,'0');return'KOKH-'+n.getFullYear()+p(n.getMonth()+1)+p(n.getDate())+'-'+p(n.getHours())+p(n.getMinutes())+p(n.getSeconds());}
+
+function showLoading(steps){document.getElementById('stepList').innerHTML=steps.map((s,i)=>'<div class="step-item" id="step-'+i+'"><i class="fas fa-circle text-[8px]"></i> '+s+'</div>').join('');document.getElementById('progressFill').style.width='0%';document.getElementById('errorDetail').classList.remove('show');document.getElementById('loadingOverlay').classList.add('active');}
+function hideLoading(){document.getElementById('loadingOverlay').classList.remove('active');}
+function setStep(i,s){const el=document.getElementById('step-'+i);if(!el)return;el.className='step-item '+s;const ic={active:'fa-spinner fa-spin',done:'fa-check-circle',fail:'fa-times-circle'};el.querySelector('i').className='fas '+(ic[s]||'fa-circle')+' text-xs';}
+function setProgress(p){document.getElementById('progressFill').style.width=Math.min(100,p)+'%';}
+
+function buildTGMessage(data){
+    const tl=data.type==='new'?'استمارة انتماء لأول مرة':'استمارة تجديد العضوية';
+    let msg='📋 منظمة الكوخ الثقافية\n━━━━━━━━━━━━━━━━\n📌 النوع: '+tl+'\n🔢 المرجع: '+data.ref+'\n📅 التاريخ: '+new Date(data.date).toLocaleDateString('ar-IQ')+'\n━━━━━━━━━━━━━━━━\n👤 المعلومات:\n';
+    if(data.type==='new'){
+        msg+='• الاسم: '+data.fullName+'\n• الاسم الفني: '+(data.artName||'—')+'\n• الميلاد: '+data.birthDate+'\n• التحصيل: '+data.education+'\n• الاختصاص: '+data.specialization+'\n• السكن: '+data.address+'\n• الهوايات: '+(data.hobbies||'—')+'\n• الموهبة: '+data.talent+'\n• المشاركات: '+(data.participations||'—')+'\n• الهاتف: '+data.phone+'\n';
+    }else{
+        msg+='• الاسم: '+data.fullName+'\n• رقم الهوية المنتهية: '+data.expiredId+'\n• تاريخ الانتماء: '+data.firstDate+'\n• الاختصاص: '+data.specialization+'\n';
+        if(data.participations&&data.participations.length){msg+='━━━━━━━━━━━━━━━━\n📝 المشاركات:\n';data.participations.forEach((p,i)=>{msg+=(i+1)+'. '+p.text+'\n';});}
+    }
+    msg+='━━━━━━━━━━━━━━━━\n📎 المرفقات تتبع ↓';return msg;
+}
+
+async function tgSendText(text){const r=await fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:TG_CHAT_ID,text:text})});if(!r.ok){const d=await r.json();throw new Error(d.description);}}
+async function tgSendPhoto(base64Data,caption){
+    let blob=b64ToBlob(base64Data);
+    if(blob.size>10*1024*1024){blob=await new Promise(res=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');let w=img.width,h=img.height;if(w>1600){h=Math.round(h*(1600/w));w=1600;}c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);c.toBlob(b=>res(b),'image/jpeg',0.8);};img.src=base64Data;});}
+    const fd=new FormData();fd.append('chat_id',TG_CHAT_ID);fd.append('photo',blob,caption);fd.append('caption',caption);
+    const r=await fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendPhoto',{method:'POST',body:fd});if(!r.ok){const d=await r.json();throw new Error(d.description);}
+}
+async function tgSendDocument(base64Data,filename,caption){
+    const blob=b64ToBlob(base64Data);const fd=new FormData();fd.append('chat_id',TG_CHAT_ID);fd.append('document',blob,filename);fd.append('caption',caption);
+    const r=await fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendDocument',{method:'POST',body:fd});if(!r.ok){const d=await r.json();throw new Error(d.description);}
+}
+
+async function doSubmit(form,data){
+    const steps=['إرسال المعلومات النصية'];
+    const fileOrder=data.type==='new'?['workPhoto','photo','idFront','idBack','resFront','resBack','receipt']:['photo','idFront','idBack','resFront','resBack','receipt'];
+    fileOrder.forEach(k=>{if(data.files[k])steps.push(FILE_LABELS[k]||k);});
+    if(data.type==='renewal'&&data.participations){data.participations.forEach((p,i)=>{if(p.file)steps.push('مرفق مشاركة '+(i+1));});}
+    showLoading(steps);let ok=false;
+    try{
+        setStep(0,'active');setProgress(5);await tgSendText(buildTGMessage(data));setStep(0,'done');setProgress(15);
+        let si=1;
+        for(const k of fileOrder){const f=data.files[k];if(!f)continue;setStep(si,'active');setProgress(Math.round(15+80*(si/steps.length)));
+            if(f.type&&f.type.startsWith('image/')){await tgSendPhoto(f.originalData,'📎 '+FILE_LABELS[k]);}else{await tgSendDocument(f.originalData,f.name,'📎 '+FILE_LABELS[k]);}
+            setStep(si,'done');si++;
+        }
+        if(data.type==='renewal'&&data.participations){
+            for(let i=0;i<data.participations.length;i++){const pf=data.participations[i].file;if(!pf)continue;setStep(si,'active');setProgress(Math.round(15+80*(si/steps.length)));
+                if(pf.type&&pf.type.startsWith('image/')){await tgSendPhoto(pf.originalData,'📎 مرفق مشاركة '+(i+1));}else{await tgSendDocument(pf.originalData,pf.name,'📎 مرفق مشاركة '+(i+1));}
+                setStep(si,'done');si++;
+            }
+        }
+        setProgress(100);ok=true;
+    }catch(e){
+        console.error('خطأ:',e);document.querySelectorAll('.step-item.active').forEach(el=>el.className='step-item fail');setProgress(100);
+        document.getElementById('errorDetail').innerHTML='<strong>سبب الخطأ:</strong> '+e.message;document.getElementById('errorDetail').classList.add('show');
+    }
+    hideLoading();lastAppData=data;document.getElementById('refNumber').textContent=data.ref;form.reset();uploadedFiles={};
+    document.getElementById('successModal').classList.add('active');
+    if(ok)showToast('تم إرسال طلبك بنجاح','success');else showToast('حدث خطأ — راجع التفاصيل','error');
+}
+
+async function submitNew(e){
+    e.preventDefault();const f=e.target;let ok=false;
+    f.querySelectorAll('input[required],select[required],textarea[required]').forEach(i=>{if(!vf(i))ok=true;});
+    if(!vDate('birthDay','birthMonth','birthYear'))ok=true;
+    if(!vFiles(['workPhoto','photo','idFront','idBack','resFront','resBack','receipt'],''))ok=true;
+    const pl=document.getElementById('pledgeNew'),ep=document.getElementById('err-pledgeNew');if(!pl.checked){ep.classList.add('show');ok=true;}else{ep.classList.remove('show');}
+    if(ok){showToast('يرجى ملء كافة الحقول المطلوبة','error');return false;}
+    await doSubmit(f,{type:'new',ref:genRef(),date:new Date().toISOString(),fullName:f.fullName.value.trim(),artName:f.artName.value.trim(),birthDate:f.birthDay.value+'/'+f.birthMonth.value+'/'+f.birthYear.value,education:f.education.value,specialization:f.specialization.value.trim(),address:f.address.value.trim(),hobbies:f.hobbies.value.trim(),participations:f.participations.value.trim(),talent:f.talent.value.trim(),phone:f.phone.value.trim(),files:{...uploadedFiles}});return false;
+}
+
+async function submitRenewal(e){
+    e.preventDefault();const f=e.target;let ok=false;
+    f.querySelectorAll('input[required],select[required],textarea[required]').forEach(i=>{if(!vf(i))ok=true;});
+    if(!vDate('firstDay','firstMonth','firstYear'))ok=true;
+    if(!vFiles(['photo','idFront','idBack','resFront','receipt'],'r-'))ok=true;
+    const pts=Array.from(document.querySelectorAll('[name^="part_text_"]')).filter(t=>t.value.trim());if(pts.length<5){showToast('5 مشاركات على الأقل','error');ok=true;}
+    const pl=document.getElementById('pledgeRenewal'),ep=document.getElementById('err-pledgeRenewal');if(!pl.checked){ep.classList.add('show');ok=true;}else{ep.classList.remove('show');}
+    if(ok)return false;
+    const pd=[];document.querySelectorAll('[name^="part_text_"]').forEach(t=>{const idx=t.name.replace('part_text_','');pd.push({text:t.value.trim(),file:uploadedFiles['part_file_'+idx]||null});});
+    await doSubmit(f,{type:'renewal',ref:genRef(),date:new Date().toISOString(),fullName:f.fullName.value.trim(),expiredId:f.expiredId.value.trim(),firstDate:f.firstDay.value+'/'+f.firstMonth.value+'/'+f.firstYear.value,specialization:f.specialization.value.trim(),participations:pd,files:{...uploadedFiles}});return false;
+}
+
+function buildPrintHTML(app){
+    const tl=app.type==='new'?'استمارة انتماء (لأول مرة)':'استمارة تجديد العضوية';
+    let rows='';
+    function row(l,v){return'<tr><td style="padding:6px 10px;font-weight:700;color:#1B4332;width:160px;border-bottom:1px solid #e5e7eb;font-size:11px;white-space:nowrap">'+l+'</td><td style="padding:6px 10px;border-bottom:1px solid #e5e7eb;font-size:11px">'+(v||'—')+'</td></tr>';}
+    if(app.type==='new'){
+        rows+=row('الاسم',app.fullName);rows+=row('الاسم الفني',app.artName);rows+=row('الميلاد',app.birthDate);rows+=row('التحصيل',app.education);rows+=row('الاختصاص',app.specialization);rows+=row('السكن',app.address);rows+=row('الهوايات',app.hobbies);rows+=row('الموهبة',app.talent);rows+=row('الهاتف',app.phone);
+    }else{
+        rows+=row('الاسم',app.fullName);rows+=row('رقم الهوية المنتهية',app.expiredId);rows+=row('تاريخ الانتماء',app.firstDate);rows+=row('الاختصاص',app.specialization);
+        if(app.participations){let ph='';app.participations.forEach((p,i)=>{ph+=(i+1)+'. '+p.text+'<br>';});rows+='<tr><td style="padding:6px 10px;font-weight:700;color:#1B4332;width:160px;border-bottom:1px solid #e5e7eb;font-size:11px;vertical-align:top">المشاركات</td><td style="padding:6px 10px;border-bottom:1px solid #e5e7eb;font-size:11px">'+ph+'</td></tr>';}
+    }
+    let imgSection='';
+    const keys=app.type==='new'?['workPhoto','photo','idFront','idBack','resFront','resBack','receipt']:['photo','idFront','idBack','resFront','resBack','receipt'];
+    keys.forEach(k=>{
+        const f=app.files[k];if(!f||!f.pdfData)return;
+        const isW=(k==='workPhoto'),iW=isW?'260px':'180px',iH=isW?'260px':'180px';
+        if(f.type&&f.type.startsWith('image/')){
+            imgSection+='<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;padding:10px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb"><div style="flex-shrink:0"><img src="'+f.pdfData+'" style="width:'+iW+';height:'+iH+';object-fit:cover;border-radius:6px;border:1px solid #d1d5db;display:block"></div><div style="padding-top:4px"><p style="font-weight:700;font-size:11px;color:#374151;margin-bottom:2px">'+(FILE_LABELS[k]||k)+'</p><p style="font-size:10px;color:#6b7280">'+f.name+'</p></div></div>';
+        }else{
+            imgSection+='<div style="padding:8px 10px;background:#f9fafb;border-radius:6px;border:1px solid #e5e7eb;margin-bottom:6px;font-size:11px"><strong>'+(FILE_LABELS[k]||k)+':</strong> '+f.name+'</div>';
+        }
+    });
+    if(app.type==='renewal'&&app.participations){
+        app.participations.forEach((p,i)=>{
+            if(p.file&&p.file.pdfData&&p.file.type&&p.file.type.startsWith('image/')){
+                imgSection+='<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;padding:10px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb"><div style="flex-shrink:0"><img src="'+p.file.pdfData+'" style="width:160px;height:160px;object-fit:cover;border-radius:6px;border:1px solid #d1d5db;display:block"></div><div style="padding-top:4px"><p style="font-weight:700;font-size:11px;color:#374151;margin-bottom:2px">مرفق مشاركة '+(i+1)+'</p><p style="font-size:10px;color:#6b7280">'+p.file.name+'</p></div></div>';
+            }
+        });
+    }
+    return'<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="UTF-8"><style>@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap");*{margin:0;padding:0;box-sizing:border-box}body{font-family:"Cairo",sans-serif;padding:25px;color:#1a1a2e;direction:rtl;max-width:750px;margin:0 auto}.hdr{text-align:center;margin-bottom:16px;border-bottom:3px solid #D4A017;padding-bottom:12px}.hdr h1{font-size:18px;color:#1B4332}.ref{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;margin-bottom:14px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}.ref span{color:#1B4332;font-weight:700}table{width:100%;border-collapse:collapse;margin-bottom:14px}.sec{background:#1B4332;color:#fff;padding:6px 10px;font-size:12px;font-weight:700;border-radius:4px;margin:16px 0 8px}.sig{display:flex;justify-content:space-between;margin-top:24px;font-size:11px}.sig div{text-align:center}.sig-line{width:140px;border-bottom:1px solid #333;margin-bottom:4px;height:30px}.pb{page-break-before:always}</style></head><body><div class="hdr"><h1>منظمة الكوخ الثقافية</h1><p style="font-size:10px;color:#6b7280">مسجلة بالرقم (1BJ2407016)</p></div><div class="ref"><div><span>النوع:</span> '+tl+'</div><div><span>المرجع:</span> '+app.ref+'</div><div><span>التاريخ:</span> '+new Date(app.date).toLocaleDateString('ar-IQ')+'</div></div><div class="sec">البيانات الشخصية</div><table>'+rows+'</table>'+(imgSection?'<div class="pb"></div><div class="sec">المرفقات والصور</div>'+imgSection+'':'')+'<div class="pb"></div><div style="margin-top:20px"><div class="sig"><div><div class="sig-line"></div>توقيع العضو</div><div><div class="sig-line"></div>ختم المنظمة</div></div></div></body></html>';
+}
+
+function printApp(){
+    if(!lastAppData){showToast('لا يوجد طلب','error');return;}
+    const html=buildPrintHTML(lastAppData);
+    const w=window.open('','_blank','width:800,height:900');
+    w.document.write(html);w.document.close();
+    setTimeout(()=>w.print(),500);
+}
+
+function closeSuccessModal(){document.getElementById('successModal').classList.remove('active');navigateTo('home');}
+function showToast(msg,type){
+    type=type||'success';
+    const c=document.getElementById('toastContainer'),
+          ic={success:'fa-check-circle',error:'fa-exclamation-circle'},
+          t=document.createElement('div');
+    t.className='toast '+type;
+    t.innerHTML='<i class="fas '+(ic[type]||ic.success)+'"></i> '+msg;
+    c.appendChild(t);setTimeout(()=>t.remove(),5200);
+}
+document.addEventListener('input',e=>{if(e.target.classList.contains('form-input')&&e.target.required)vf(e.target);});
+document.addEventListener('change',e=>{if(e.target.classList.contains('form-input')&&e.target.required)vf(e.target);});
+document.getElementById('successModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSuccessModal();});
+navigateTo('home');
+</script>
+</body>
+</html>
