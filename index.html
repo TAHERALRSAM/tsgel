@@ -3,51 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الموقع متوقف</title>
+    <title>مرسم أمير | المعرض الشخصي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        body { font-family: 'Tajawal', sans-serif; background-color: #050811; color: white; scroll-behavior: smooth; }
+        .hero-section {
+            background-image: linear-gradient(to bottom, rgba(5, 8, 17, 0.7), rgba(5, 8, 17, 1)), url('https://i.postimg.cc/85zX3S0y/image.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center;
         }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-top: 8px solid #e74c3c;
-            max-width: 80%;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s; overflow: hidden;
         }
-        h1 {
-            color: #e74c3c;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        p {
-            color: #555;
-            font-size: 20px;
-            line-height: 1.6;
-        }
-        .icon {
-            font-size: 60px;
-            color: #e74c3c;
-            margin-bottom: 20px;
-        }
+        .glass-card:hover { border-color: #8b5cf6; transform: translateY(-10px); }
+        .category-btn { background: rgba(255, 255, 255, 0.05); padding: 10px 20px; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+        .category-btn.active { background: #8b5cf6; box-shadow: 0 0 15px rgba(139, 92, 246, 0.5); }
+        .work-item { display: none; }
+        .work-item.show { display: block; animation: fadeInUp 0.5s ease forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="icon">⚠️</div>
-        <h1>عذراً، الموقع متوقف حالياً</h1>
-        <p>تم إيقاف خدمات هذا الموقع مؤقتاً بسبب عدم سداد المستحقات المالية (الأجور).</p>
-        <p style="font-size: 16px; color: #888;">يرجى التواصل  07823464275 طاهر دوهان لإعادة التفعيل.</p>
-    </div>
+    <nav class="fixed w-full z-50 bg-black/50 backdrop-blur-md p-4 border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-black text-purple-500">مرسم أمير</div>
+            <button class="bg-purple-600 px-5 py-2 rounded-full font-bold text-sm">اطلب عملك الآن</button>
+        </div>
+    </nav>
 
+    <header class="hero-section">
+        <div data-aos="zoom-in">
+            <h1 class="text-6xl font-black mb-4">مرسم <span class="text-purple-500">أمير</span></h1>
+            <p class="text-xl text-gray-300 italic">فن يحاكي الواقع بريشة الإبداع</p>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="flex flex-wrap justify-center gap-4 mb-16" data-aos="fade-up">
+            <button onclick="filterArt('all')" id="all-btn" class="category-btn active">الكل</button>
+            <button onclick="filterArt('oil')" id="oil-btn" class="category-btn">الرسم الزيتي</button>
+            <button onclick="filterArt('cafe')" id="cafe-btn" class="category-btn">جداريات كوفيات</button>
+            <button onclick="filterArt('portrait')" id="portrait-btn" class="category-btn">رسم البورتريه</button>
+            <button onclick="filterArt('kids')" id="kids-btn" class="category-btn">روضات أطفال</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+
+            <!-- لوحة البومة - زيتي -->
+            <div class="work-item show oil" data-aos="fade-up">
+                <div class="glass-card rounded-[2rem]">
+                    <img src="https://i.postimg.cc/mD8mC9gW/owl.jpg" class="w-full h-[500px] object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">لوحة البومة الليلية</h3>
+                        <p class="text-gray-400 text-sm mb-4">رسم زيتي احترافي يبرز تفاصيل الريش وعمق النظرة.</p>
+                        <div class="flex justify-between border-t border-white/10 pt-4">
+                            <span class="text-purple-400 font-bold">السعر: 100$</span>
+                            <span class="text-gray-500 text-xs">رسم زيتي</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة الوجه التجريدي - كوفيات -->
+            <div class="work-item show cafe" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card rounded-[2rem]">
+                    <img src="https://i.postimg.cc/kXy0FfXv/abstract.jpg" class="w-full h-[500px] object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">بورتريه الألوان العصرية</h3>
+                        <p class="text-gray-400 text-sm mb-4">تصميم جداري مودرن يدمج بين الواقعية والتجريد، مثالي للكوفيات.</p>
+                        <div class="flex justify-between border-t border-white/10 pt-4">
+                            <span class="text-purple-400 font-bold">حسب المساحة</span>
+                            <span class="text-gray-500 text-xs">جداريات</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة الشخصية التاريخية - زيتي/بورتريه -->
+            <div class="work-item show oil portrait" data-aos="fade-up">
+                <div class="glass-card rounded-[2rem]">
+                    <img src="https://i.postimg.cc/9M6yX9qS/religious.jpg" class="w-full h-[500px] object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">لوحة الشخصيات التاريخية</h3>
+                        <p class="text-gray-400 text-sm mb-4">رسم زيتي كلاسيكي بأسلوب واقعي يجسد الوقار والتفاصيل التراثية.</p>
+                        <div class="flex justify-between border-t border-white/10 pt-4">
+                            <span class="text-purple-400 font-bold">150$</span>
+                            <span class="text-gray-500 text-xs">زيتي / بورتريه</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة كاظم الساهر - بورتريه -->
+            <div class="work-item show portrait" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card rounded-[2rem]">
+                    <img src="https://i.postimg.cc/fRTX6xZ1/kazem.jpg" class="w-full h-[500px] object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">بورتريه القيصر كاظم الساهر</h3>
+                        <p class="text-gray-400 text-sm mb-4">رسم بورتريه فني مع دمج الخط العربي لإضافة لمسة شاعرية.</p>
+                        <div class="flex justify-between border-t border-white/10 pt-4">
+                            <span class="text-purple-400 font-bold">80$</span>
+                            <span class="text-gray-500 text-xs">رسم بورتريه</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="py-10 text-center border-t border-white/5 text-gray-500 text-sm">
+        <p>© 2024 مرسم أمير - الفن لغة العالم</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        function filterArt(category) {
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(category + '-btn').classList.add('active');
+            document.querySelectorAll('.work-item').forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) item.classList.add('show');
+                else item.classList.remove('show');
+            });
+        }
+    </script>
 </body>
 </html>
